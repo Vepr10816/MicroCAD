@@ -7,10 +7,10 @@
             "args": [
                 "/Zi",
                 "/EHsc",
+                "/std:c++latest",
                 "/Fe${workspaceFolder}\\main.exe",
                 "/I${workspaceFolder}\\include",
                 "${workspaceFolder}\\main.cpp",
-                //"${workspaceFolder}\\src\\*.cpp"
             ],
             "options": {
                 "cwd": "${fileDirname}"
