@@ -24,6 +24,16 @@ class Line : public Shape
             return 0;
         }
 
+        void move(double dx, double dy) override {
+            start_.move(dx, dy);
+            end_.move(dx, dy);
+        }
+
+        void scale(double factor) override {
+            start_.scale(factor);
+            end_.scale(factor);
+        }
+
         double getStartX() const {return start_.getX();}
         double getStartY() const {return start_.getY();}
         double getEndX() const {return end_.getX();}

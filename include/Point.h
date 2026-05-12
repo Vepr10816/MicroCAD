@@ -24,6 +24,16 @@ public:
         return 0;
     }
 
+    void move(double dx, double dy) override {
+        x_ += dx;
+        y_ += dy;
+    }
+
+    void scale(double factor) override {
+        x_ *= factor;
+        y_ *= factor;
+    }
+
     double getX() const {return x_;}
     double getY() const {return y_;}
 

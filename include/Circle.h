@@ -29,6 +29,15 @@ class Circle : public Shape
             return std::numbers::pi * (radius_ * radius_);
         }
 
+        void move(double dx, double dy) override {
+            centre_.move(dx, dy);
+        }
+
+        void scale(double factor) {
+            centre_.scale(factor);
+            radius_ *= factor;
+        }
+
         double getCenterX() const {return centre_.getX();}
         double getCentreY() const {return centre_.getY();}
         double getRadius() const {return radius_;}

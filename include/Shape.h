@@ -19,6 +19,10 @@ public:
 
     virtual double getArea() const = 0;
 
+    virtual void move(double dx, double dy) = 0;
+
+    virtual void scale(double factor) = 0;
+
     int getId() const {
         return id_;
     }
