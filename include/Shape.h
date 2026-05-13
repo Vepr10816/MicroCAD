@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "BoundingBox.h"
 
 /*
     Абстрактный класс Фигура
@@ -22,6 +23,8 @@ public:
     virtual void move(double dx, double dy) = 0;
 
     virtual void scale(double factor) = 0;
+
+    virtual BoundingBox getBounds() const = 0;
 
     int getId() const {
         return id_;

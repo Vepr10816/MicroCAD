@@ -61,6 +61,27 @@ public:
         return false;
     }
 
+    void printBoundingBox() const {
+        if (shapes_.empty()) {
+            std::cout << "Нет фигур в документе." << std::endl;
+            return;
+        }
+
+        BoundingBox total = shapes_[0]->getBounds();
+
+        for(size_t i = 1; i < shapes_.size(); i++) {
+            BoundingBox current = shapes_[i]->getBounds();
+            if(current.minX < total.minX) total.minX = current.minX;
+            if(current.minY < total.minY) total.minX = current.minY;
+            if(current.maxX > total.maxX) total.maxX = current.maxX;
+            if(current.maxY > total.maxY) total.maxY = current.maxY;
+        }
+
+        std::cout << "=== Охватывающий прямоугольник ===" << std::endl;
+        std::cout << "Min: (" << total.minX << ", " << total.minY << ")" << std::endl;
+        std::cout << "Max: (" << total.maxX << ", " << total.maxY << ")" << std::endl;
+    }
+
 private:
     std::vector<std::unique_ptr<Shape>> shapes_;
 

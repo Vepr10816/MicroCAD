@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Shape.h"
 #include <string>
 #include <sstream>
+#include "Shape.h"
+#include "BoundingBox.h"
 
 /*
     Класс наследник Точка
@@ -32,6 +33,10 @@ public:
     void scale(double factor) override {
         x_ *= factor;
         y_ *= factor;
+    }
+
+    BoundingBox getBounds() const override {
+        return BoundingBox{x_, y_, x_, y_};
     }
 
     double getX() const {return x_;}

@@ -1,8 +1,9 @@
 #pragma once
-#include "Shape.h"
-#include "Point.h"
+
 #include <string>
 #include <sstream>
+#include "Shape.h"
+#include "Point.h"
 
 /*
     Класс наследник Линия
@@ -33,6 +34,13 @@ public:
         start_.scale(factor);
         end_.scale(factor);
     }
+
+    BoundingBox getBounds() const override {
+        return BoundingBox{
+            std::min(getStartX(), getEndX()), std::min(getStartY(), getEndY()), 
+            std::max(getStartX(), getEndX()), std::max(getStartY(), getEndY())
+        };
+    } 
 
     double getStartX() const {return start_.getX();}
     double getStartY() const {return start_.getY();}

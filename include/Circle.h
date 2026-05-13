@@ -1,9 +1,10 @@
 #pragma once
-#include "Shape.h"
-#include "Point.h"
+
 #include <string>
 #include <sstream>
 #include <numbers>
+#include "Shape.h"
+#include "Point.h"
 
 /*
     Класс наследник Круг
@@ -38,8 +39,15 @@ public:
         radius_ *= factor;
     }
 
+    BoundingBox getBounds() const override {
+        return BoundingBox{
+            getCenterX() - getRadius(), getCenterY() - getRadius(),
+            getCenterX() + getRadius(), getCenterY() + getRadius(),
+        };
+    } 
+
     double getCenterX() const {return centre_.getX();}
-    double getCentreY() const {return centre_.getY();}
+    double getCenterY() const {return centre_.getY();}
     double getRadius() const {return radius_;}
 
 private:
