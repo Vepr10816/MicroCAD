@@ -4,21 +4,35 @@
 #include "Point.h"
 #include "Line.h"
 #include "Circle.h"
+#include "Document.h"
+#include <windows.h>
 
 
 int main() {
 
-    std::vector <std::unique_ptr<Shape>> shapes;
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
 
-    shapes.push_back(std::make_unique<Point>(1, 2.22, -1.2));
-    shapes.push_back(std::make_unique<Line>(2, 0, 2, 7, 9));
-    shapes.push_back(std::make_unique<Circle>(3, 0, 0, 25));
+    Document doc;
+    doc.addShape(std::make_unique<Point>(1, 1, -2));
+    doc.addShape(std::make_unique<Line>(2, 0, 0, 5, 6));
+    doc.addShape(std::make_unique<Circle>(3, 10, 10, 4.5));
 
-    std::cout << "Количество фигур " << shapes.size() << ": " << std::endl << std::endl;
+    doc.printAll();
+    doc.printBoundingBox();
 
-    for(const auto& shape : shapes) {
-        std::cout << shape->getInfo() << ", Area = " << shape->getArea() << std::endl;
-    }
+    Shape* found = doc.findById(2);
+    if(found)
+        found->move(1, 1);
+    
+    doc.moveShape(1, 3, 3);
+
+    doc.removeById(1);
+
+    doc.scaleShape(3, 10);
+
+    doc.printAll();
+    doc.printBoundingBox();
 
     return 0;
 }
