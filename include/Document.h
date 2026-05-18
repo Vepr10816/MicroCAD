@@ -48,9 +48,9 @@ public:
     }
 
     bool moveShape(int id, double dx, double dy) {
-        Shape* shape = findById(id);
-        std::cout << "=== Перемещение фигуры "<< shape -> getInfo() << " на (" << dx << ", " << dy << ") ===" << std::endl; 
+        Shape* shape = findById(id); 
         if(shape) {
+            std::cout << "=== Перемещение фигуры "<< shape -> getInfo() << " на (" << dx << ", " << dy << ") ===" << std::endl;
             shape->move(dx, dy);
             return true;
         }
@@ -59,8 +59,8 @@ public:
 
     bool scaleShape(int id, double factor) {
         Shape* shape = findById(id);
-        std::cout << "=== Масштабирование фигуры "<< shape -> getInfo() << " с коэффициентом "  << factor << " ===" << std::endl; 
         if(shape) {
+            std::cout << "=== Масштабирование фигуры "<< shape -> getInfo() << " с коэффициентом "  << factor << " ===" << std::endl; 
             shape -> scale(factor);
             return true;
         }
@@ -86,6 +86,10 @@ public:
         std::cout << "=== Охватывающий прямоугольник ===" << std::endl;
         std::cout << "Min: (" << total.minX << ", " << total.minY << ")" << std::endl;
         std::cout << "Max: (" << total.maxX << ", " << total.maxY << ")" << std::endl;
+    }
+
+    int size() const {
+        return shapes_.size();
     }
 
 private:
