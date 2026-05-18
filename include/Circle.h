@@ -2,7 +2,6 @@
 
 #include <string>
 #include <sstream>
-#include <numbers>
 #include "Shape.h"
 #include "Point.h"
 
@@ -27,7 +26,7 @@ public:
     }
 
     double getArea() const override {
-        return std::numbers::pi * (radius_ * radius_);
+        return 3.14 * (radius_ * radius_);
     }
 
     void move(double dx, double dy) override {
