@@ -62,8 +62,46 @@
         {
             "label": "Clean",
             "type": "shell",
-            "command": "del /Q ${workspaceFolder}\\*.exe ${workspaceFolder}\\*.obj 2>nul",
+            "command": "del /Q ${workspaceFolder}\\*.exe ${workspaceFolder}\\*.obj ${workspaceFolder}\\gui\\*.obj 2>nul",
             "problemMatcher": []
+        },
+        {
+            "type": "cppbuild",
+            "label": "Build Qt GUI",
+            "command": "cl.exe",
+            "args": [
+                "/EHsc",
+                "/std:c++17",
+                "/Fe${workspaceFolder}\\cad_gui.exe",
+                "/I${workspaceFolder}\\include",
+                "/I${workspaceFolder}\\gui",
+                "/IC:\\vcpkg\\installed\\x64-windows\\include\\Qt5",
+                "/IC:\\vcpkg\\installed\\x64-windows\\include\\Qt5\\QtCore",
+                "/IC:\\vcpkg\\installed\\x64-windows\\include\\Qt5\\QtGui",
+                "/IC:\\vcpkg\\installed\\x64-windows\\include\\Qt5\\QtWidgets",
+                "${workspaceFolder}\\main_qt.cpp",
+                "${workspaceFolder}\\gui\\CadWidget.cpp",
+                "${workspaceFolder}\\gui\\MainWindow.cpp",
+                "C:\\vcpkg\\installed\\x64-windows\\lib\\Qt5Core.lib",
+                "C:\\vcpkg\\installed\\x64-windows\\lib\\Qt5Gui.lib",
+                "C:\\vcpkg\\installed\\x64-windows\\lib\\Qt5Widgets.lib"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$msCompile"],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "Run Qt GUI",
+            "type": "shell",
+            "command": "${workspaceFolder}\\cad_gui.exe",
+            "dependsOn": ["Build Qt GUI"],
+            "problemMatcher": [],
+            "group": "test"
         }
     ]
 }
