@@ -21,6 +21,16 @@ int main() {
     doc.printAll();
     doc.printBoundingBox();
 
+    std::cout << std::endl;
+
+    if(doc.saveToFile("doc1.json")) {
+        std::cout << "Успешное сохранение!" << std::endl;
+    } else {
+        std::cout << "Ошибка сохранения!" << std::endl;
+    }
+
+    std::cout << std::endl;
+
     Shape* found = doc.findById(2);
     if(found)
         found->move(1, 1);
@@ -30,6 +40,17 @@ int main() {
     doc.removeById(1);
 
     doc.scaleShape(3, 10);
+
+    doc.printAll();
+    doc.printBoundingBox();
+
+    std::cout << std::endl;
+
+    if(doc.loadFromFile("doc1.json")) {
+        std::cout << "Успешная загрузка!" << std::endl;
+    } else {
+        std::cout << "Ошибка загрузки!" << std::endl;
+    }
 
     doc.printAll();
     doc.printBoundingBox();

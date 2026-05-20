@@ -39,6 +39,22 @@ public:
         return BoundingBox{x_, y_, x_, y_};
     }
 
+    nlohmann::json toJson() const override {
+        nlohmann::json json;
+        json["type"] = "point";
+        json["id"] = getId();
+        json["x"] = x_;
+        json["y"] = y_;
+
+        return json;
+    }
+
+    void fromJson(const nlohmann::json& json) override {
+        setId(json["id"].get<int>());
+        x_ = json["x"].get<double>();
+        y_ = json["y"].get<double>();
+    }
+
     double getX() const {return x_;}
     double getY() const {return y_;}
 

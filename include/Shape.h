@@ -2,6 +2,7 @@
 
 #include <string>
 #include "BoundingBox.h"
+#include "json.hpp"
 
 /*
     Абстрактный класс Фигура
@@ -26,8 +27,15 @@ public:
 
     virtual BoundingBox getBounds() const = 0;
 
+    virtual nlohmann::json toJson() const = 0;
+
+    virtual void fromJson(const nlohmann::json& json) = 0;
+
     int getId() const {
         return id_;
+    }
+    void setId(int id) {
+        id_ = id;
     }
 
 private:

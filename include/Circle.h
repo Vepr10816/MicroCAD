@@ -43,7 +43,23 @@ public:
             getCenterX() - getRadius(), getCenterY() - getRadius(),
             getCenterX() + getRadius(), getCenterY() + getRadius(),
         };
-    } 
+    }
+    
+    nlohmann::json toJson() const override {
+        nlohmann::json json;
+        json["type"] = "circle";
+        json["id"] = getId();
+        json["centre"] = {{"x", centre_.getX()}, {"y", centre_.getY()}};
+        json["radius"] = radius_;
+
+        return json;
+    }
+
+    void fromJson(const nlohmann::json& json) override{
+        setId(json["id"].get<double>());
+        centre_ = Point(json["centre"]["x"], json["centre"]["y"]);
+        radius_ = json["radius"];
+    }
 
     double getCenterX() const {return centre_.getX();}
     double getCenterY() const {return centre_.getY();}

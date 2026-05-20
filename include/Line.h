@@ -42,6 +42,22 @@ public:
         };
     } 
 
+    nlohmann::json toJson() const override {
+        nlohmann::json json;
+        json["type"] = "line";
+        json["id"] = getId();
+        json["start"] = {{"x", start_.getX()}, {"y", start_.getY()}};
+        json["end"] = {{"x", end_.getX()}, {"y", end_.getY()}};
+
+        return json;
+    }
+
+    void fromJson(const nlohmann::json& json) override {
+        setId(json["id"].get<int>());
+        start_ = Point(json["start"]["x"].get<double>(), json["start"]["y"].get<double>());
+        end_ = Point(json["end"]["x"].get<double>(), json["end"]["y"].get<double>());
+    }
+
     double getStartX() const {return start_.getX();}
     double getStartY() const {return start_.getY();}
     double getEndX() const {return end_.getX();}

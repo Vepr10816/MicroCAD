@@ -6,6 +6,23 @@
 #include "Shape.h"
 #include <iostream>
 #include <string>
+#include <fstream>
+
+#ifdef _WIN32
+#include <direct.h> // для mkdir
+#define MKDIR(path) _mkdir(path)
+#else
+#include <sys/stat.h> // для mkdir на Linux/Mac
+#define MKDIR(path) mkdir(path, 0777)
+#endif
+
+// Папка с сохранениями
+constexpr const char* DATA_DIR = "data/";
+
+// Проверка на существование
+inline void ensureDirectoryExists() {
+    MKDIR(DATA_DIR);
+}
 
 /*
     Класс композиция
@@ -90,6 +107,63 @@ public:
 
     int size() const {
         return shapes_.size();
+    }
+
+    bool saveToFile(const std::string& fileName) const {
+
+        ensureDirectoryExists(); 
+        std::string fullPath = std::string(DATA_DIR) + fileName;
+
+        nlohmann::json output;
+
+        for(const auto& shape : shapes_) {
+            output["shapes"].push_back(shape->toJson());
+        }
+
+        std::ofstream file(fullPath);
+        if(!file.is_open()) {
+            return false;
+        }
+
+        file << output.dump(4);
+        return true;
+    }
+
+    bool loadFromFile(const std::string& fileName) {
+
+        std::string fullPath = std::string(DATA_DIR) + fileName;
+
+        std::ifstream file(fullPath);
+        if(!file.is_open()) {
+            return false;
+        }
+
+        nlohmann::json input;
+        file >> input;
+
+        shapes_.clear();
+
+        for (const auto& item : input["shapes"]) {
+            std::string type = item["type"];
+            
+            if (type == "point") {
+                auto p = std::make_unique<Point>(0, 0, 0);
+                p->fromJson(item);
+                addShape(std::move(p));
+            }
+            else if (type == "line") {
+                auto l = std::make_unique<Line>(0, 0, 0, 0, 0);
+                l->fromJson(item);
+                addShape(std::move(l));
+            }
+            else if (type == "circle") {
+                auto c = std::make_unique<Circle>(0, 0, 0, 0);
+                c->fromJson(item);
+                addShape(std::move(c));
+            }
+        }
+        
+        return true;    
     }
 
 private:
