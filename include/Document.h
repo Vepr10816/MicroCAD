@@ -3,10 +3,14 @@
 #include <vector>
 #include <memory>
 #include <algorithm>
-#include "Shape.h"
 #include <iostream>
 #include <string>
 #include <fstream>
+
+#include "Shape.h"
+#include "Point.h"    
+#include "Line.h"     
+#include "Circle.h"   
 
 #ifdef _WIN32
 #include <direct.h> // для mkdir
@@ -33,6 +37,11 @@ inline void ensureDirectoryExists() {
 class Document
 {
 public:
+
+    const std::vector<std::unique_ptr<Shape>>& getShapes() const {
+        return shapes_;
+    }
+
     void addShape(std::unique_ptr<Shape> shape) {
         shapes_.push_back(std::move(shape));
     }
@@ -84,25 +93,39 @@ public:
         return false;
     }
 
+    BoundingBox getBoundingBox() const {
+        if (shapes_.empty()) {
+            return BoundingBox{0, 0, 0, 0};  // Пустой
+        }
+
+        BoundingBox total = shapes_[0]->getBounds();
+
+        for (size_t i = 1; i < shapes_.size(); i++) {
+            BoundingBox current = shapes_[i]->getBounds();
+            if (current.minX < total.minX) total.minX = current.minX;
+            if (current.minY < total.minY) total.minY = current.minY;  // ← Заметь: total.minY, а не total.minX!
+            if (current.maxX > total.maxX) total.maxX = current.maxX;
+            if (current.maxY > total.maxY) total.maxY = current.maxY;
+        }
+
+        return total;
+    }
+    
     void printBoundingBox() const {
         if (shapes_.empty()) {
             std::cout << "Нет фигур в документе." << std::endl;
             return;
         }
 
-        BoundingBox total = shapes_[0]->getBounds();
-
-        for(size_t i = 1; i < shapes_.size(); i++) {
-            BoundingBox current = shapes_[i]->getBounds();
-            if(current.minX < total.minX) total.minX = current.minX;
-            if(current.minY < total.minY) total.minX = current.minY;
-            if(current.maxX > total.maxX) total.maxX = current.maxX;
-            if(current.maxY > total.maxY) total.maxY = current.maxY;
-        }
-
+        BoundingBox bb = getBoundingBox();
+        
         std::cout << "=== Охватывающий прямоугольник ===" << std::endl;
-        std::cout << "Min: (" << total.minX << ", " << total.minY << ")" << std::endl;
-        std::cout << "Max: (" << total.maxX << ", " << total.maxY << ")" << std::endl;
+        std::cout << "Min: (" << bb.minX << ", " << bb.minY << ")" << std::endl;
+        std::cout << "Max: (" << bb.maxX << ", " << bb.maxY << ")" << std::endl;
+    }
+    
+    bool isEmpty() const {
+        return shapes_.empty();
     }
 
     int size() const {
