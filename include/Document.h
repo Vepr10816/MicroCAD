@@ -123,7 +123,7 @@ public:
         std::cout << "Min: (" << bb.minX << ", " << bb.minY << ")" << std::endl;
         std::cout << "Max: (" << bb.maxX << ", " << bb.maxY << ")" << std::endl;
     }
-    
+
     bool isEmpty() const {
         return shapes_.empty();
     }
@@ -132,10 +132,9 @@ public:
         return shapes_.size();
     }
 
-    bool saveToFile(const std::string& fileName) const {
+    bool saveToFile(const std::string& fullPath) const {
 
         ensureDirectoryExists(); 
-        std::string fullPath = std::string(DATA_DIR) + fileName;
 
         nlohmann::json output;
 
@@ -152,9 +151,7 @@ public:
         return true;
     }
 
-    bool loadFromFile(const std::string& fileName) {
-
-        std::string fullPath = std::string(DATA_DIR) + fileName;
+    bool loadFromFile(const std::string& fullPath) {
 
         std::ifstream file(fullPath);
         if(!file.is_open()) {
@@ -187,6 +184,10 @@ public:
         }
         
         return true;    
+    }
+
+    void clear() {
+        shapes_.clear();
     }
 
 private:
