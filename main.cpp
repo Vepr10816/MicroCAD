@@ -1,10 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include "Point.h"
-#include "Line.h"
-#include "Circle.h"
-#include "Document.h"
+#include "point.h"
+#include "line.h"
+#include "circle.h"
+#include "document.h"
 #include <windows.h>
 
 

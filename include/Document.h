@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 #include <algorithm>
-#include "Shape.h"
+#include "shape.h"
 #include <iostream>
 #include <string>
 #include <fstream>

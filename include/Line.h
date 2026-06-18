@@ -2,8 +2,8 @@
 
 #include <string>
 #include <sstream>
-#include "Shape.h"
-#include "Point.h"
+#include "shape.h"
+#include "point.h"
 
 /*
     Класс наследник Линия
