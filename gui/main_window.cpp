@@ -5,8 +5,8 @@
 #include <QVBoxLayout>
 #include <QStatusBar>
 
-#include "MainWindow.h"
-#include "CadWidget.h"
+#include "main_window.h"
+#include "cad_widget.h"
 
 MainWindow::MainWindow(Document* doc, QWidget* parent)
     : QMainWindow(parent), document_(doc) {

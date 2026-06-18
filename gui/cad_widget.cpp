@@ -5,7 +5,7 @@
 #include <cmath>
 #include <iostream>
 
-#include "CadWidget.h"
+#include "cad_widget.h"
 
 //Конструктор
 CadWidget::CadWidget(Document* doc, QWidget* parent)

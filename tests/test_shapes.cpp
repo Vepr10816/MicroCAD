@@ -2,10 +2,10 @@
 
 #include <memory>
 #include <sstream>
-#include "Point.h"
-#include "Line.h"
-#include "Circle.h"
-#include "Document.h"
+#include "point.h"
+#include "line.h"
+#include "circle.h"
+#include "document.h"
 
 /*
     Тесты для класса Point:

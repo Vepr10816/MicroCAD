@@ -1,10 +1,10 @@
 #include <QApplication>
 
-#include "gui/MainWindow.h"
-#include "Document.h"
-#include "Point.h"
-#include "Line.h"
-#include "Circle.h"
+#include "gui/main_window.h"
+#include "document.h"
+#include "point.h"
+#include "line.h"
+#include "circle.h"
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);

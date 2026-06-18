@@ -7,10 +7,10 @@
 #include <string>
 #include <fstream>
 
-#include "Shape.h"
-#include "Point.h"    
-#include "Line.h"     
-#include "Circle.h"   
+#include "shape.h"
+#include "point.h"    
+#include "line.h"     
+#include "circle.h"   
 
 #ifdef _WIN32
 #include <direct.h> // для mkdir

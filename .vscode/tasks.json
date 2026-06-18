@@ -80,8 +80,8 @@
                 "/IC:\\vcpkg\\installed\\x64-windows\\include\\Qt5\\QtGui",
                 "/IC:\\vcpkg\\installed\\x64-windows\\include\\Qt5\\QtWidgets",
                 "${workspaceFolder}\\main_qt.cpp",
-                "${workspaceFolder}\\gui\\CadWidget.cpp",
-                "${workspaceFolder}\\gui\\MainWindow.cpp",
+                "${workspaceFolder}\\gui\\cad_widget.cpp",
+                "${workspaceFolder}\\gui\\main_window.cpp",
                 "C:\\vcpkg\\installed\\x64-windows\\lib\\Qt5Core.lib",
                 "C:\\vcpkg\\installed\\x64-windows\\lib\\Qt5Gui.lib",
                 "C:\\vcpkg\\installed\\x64-windows\\lib\\Qt5Widgets.lib"

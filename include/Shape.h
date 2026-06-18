@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "BoundingBox.h"
+#include "bounding_box.h"
 #include "json.hpp"
 
 /*

@@ -4,7 +4,7 @@
 #include <QPointF>
 #include <memory>
 
-#include "Document.h"
+#include "document.h"
 
 enum class Tool {
     Select,

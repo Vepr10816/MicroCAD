@@ -2,8 +2,8 @@
 
 #include <string>
 #include <sstream>
-#include "Shape.h"
-#include "BoundingBox.h"
+#include "shape.h"
+#include "bounding_box.h"
 
 /*
     Класс наследник Точка

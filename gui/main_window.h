@@ -2,7 +2,7 @@
 
 #include <QMainWindow>
 #include <memory>
-#include "Document.h"
+#include "document.h"
 
 class CadWidget;
 
