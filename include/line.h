@@ -63,6 +63,9 @@ public:
     double getEndX() const {return end_.getX();}
     double getEndY() const {return end_.getY();}
 
+    void setStartXY(double x, double y) {start_ = Point(x, y);}
+    void setEndXY(double x, double y) {end_ = Point(x, y);}
+
 private:
     Point start_;
     Point end_;
